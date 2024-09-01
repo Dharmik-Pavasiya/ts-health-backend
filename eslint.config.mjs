@@ -15,7 +15,7 @@ export default tseslint.config({
     files: ['**/*.ts'],
     extends: [eslint.configs.recommended, ...tseslint.configs.recommended, eslintconfigprettier],
     rules: {
-        // 'no-console': 'error',
+        'no-console': 'error',
         quotes: ['error', 'single', { allowTemplateLiterals: true }]
     }
 })
