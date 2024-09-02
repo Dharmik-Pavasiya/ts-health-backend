@@ -1,10 +1,12 @@
 import { createLogger, format, transports } from 'winston'
 import { ConsoleTransportInstance, FileTransportInstance } from 'winston/lib/winston/transports'
 import util from 'util'
+import 'winston-mongodb'
 import config from '../config/config'
 import { EApplicationEnvironment } from '../constant/application'
 import path from 'path'
 import * as sourceMapSupport from 'source-map-support'
+import { MongoDBTransportInstance } from 'winston-mongodb'
 
 // Linking trace support
 sourceMapSupport.install()
@@ -40,11 +42,11 @@ const consoleTransport = (): Array<ConsoleTransportInstance> => {
 }
 
 const fileLogFormate = format.printf((info) => {
-    const { level, message, timestamp } = info
+    const { level, message, timestamp, meta = {} } = info
 
     const logMeta: Record<string, unknown> = {}
 
-    for (const [key, value] of Object.entries(logMeta)) {
+    for (const [key, value] of Object.entries(meta)) {
         if (value instanceof Error) {
             logMeta[key] = {
                 name: value.name,
@@ -76,9 +78,24 @@ const FileTransport = (): Array<FileTransportInstance> => {
     ]
 }
 
+const MongoDbTranspport = (): Array<MongoDBTransportInstance> => {
+    return [
+        new transports.MongoDB({
+            level: 'info',
+            db: config.DATABASE_URL as string,
+            metaKey: 'meta',
+            options: {
+                useUnifiedTopology: true
+            },
+            expireAfterSeconds: 3600 * 24 * 30,
+            collection: 'application-logs'
+        })
+    ]
+}
+
 export default createLogger({
     defaultMeta: {
         meta: {}
     },
-    transports: [...FileTransport(), ...consoleTransport()]
+    transports: [...FileTransport(), ...MongoDbTranspport(), ...consoleTransport()]
 })
