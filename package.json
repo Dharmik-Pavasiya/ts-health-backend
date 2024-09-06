@@ -24,22 +24,22 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.4.0",
-    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/cli": "^19.4.1",
+    "@commitlint/config-conventional": "^19.4.1",
     "@eslint/js": "^9.9.1",
     "@types/cors": "^2.8.17",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
-    "@types/node": "^22.5.0",
+    "@types/node": "^22.5.4",
     "@types/source-map-support": "^0.5.10",
     "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.1.5",
-    "lint-staged": "^15.2.9",
+    "lint-staged": "^15.2.10",
     "prettier": "3.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.3.0"
+    "typescript-eslint": "^8.4.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -47,7 +47,7 @@
     "dotenv-flow": "^4.1.0",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
-    "mongoose": "^8.6.0",
+    "mongoose": "^8.6.1",
     "rate-limiter-flexible": "^5.0.3",
     "source-map-support": "^0.5.21",
     "ts-migrate-mongoose": "^3.8.3",
